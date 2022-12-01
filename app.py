@@ -22,6 +22,7 @@ db = SQL("sqlite:///students.db")
 
 
 CLASSES = ["Class-9", "Class-10", "Class-11", "Class-12"]
+SUBJECTS = ["Mathematics", "Science"]
 
 
 @app.route("/")
@@ -39,10 +40,26 @@ def admissions():
         #TODO
 
 
-@app.route("/forms")
-def forms():
+@app.route("/student")
+def student():
     if request.method == "GET":
-        return render_template("forms.html", classes=CLASSES)
+        return render_template("forms.html", classes=CLASSES, subjects=SUBJECTS)
+    if request.method == "POST":
+        first_name = request.form.get("first_name")
+        middle_name = request.form.get("middle_name")
+        last_name = request.form.get("last_name")
+        birthdate = request.form.get("birthdate")
+        email = request.form.get("email")
+        own_ph = request.form.get("own_ph")
+        address = request.form.get("address")
+        address2 = request.form.get("address2")
+        grade = request.form.get("grade")
+
+
+@app.route("/subject")
+def subject():
+    if request.method == "GET":
+        return render_template("forms.html", classes=CLASSES, subjects=SUBJECTS)
     if request.method == "POST":
         ...
         #TODO

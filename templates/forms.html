@@ -5,12 +5,11 @@
 {% endblock %}
 
 {% block main %}
-    <div class="md-3">
-        About The Student
-    </div>
-    <form action="/login" class="row g-3" method="post" >
+    <h3>About The Student</h3>
+    <br>
+    <form action="/student" class="row g-3" method="post" >
         <div class="col-md-4 form-floating">
-            <input class="form-control" id="first_name" name="first_name" placeholder="First Name" type="text">
+            <input class="form-control" id="first_name" name="first_name" placeholder="First Name" type="text" required>
             <label for="first_name">First Name</label>
         </div>
         <div class="col-md-4 form-floating">
@@ -18,58 +17,43 @@
             <label for="middle_name">Middle Name</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input class="form-control" id="last_name" name="last_name" placeholder="Last Name" type="text">
+            <input class="form-control" id="last_name" name="last_name" placeholder="Last Name" type="text" required>
             <label for="last_name">Last Name</label>
         </div>
         <div class="col-2">
-            <input type="text" readonly class="form-control-plaintext" value="Birthday">
+            <input type="text" readonly class="form-control-plaintext" value="Birthdate">
         </div>
         <div class="col-2">
-            <input class="form-control" id="birthday" type="date">
+            <input class="form-control" id="birthdate" type="date" required>
         </div>
         <div class="col-md-4 form-floating">
-            <input class="form-control" id="email" name="email" placeholder="Email" type="email">
+            <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
             <label for="email">Email</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input class="form-control" id="own_ph" name="own_ph" placeholder="Phone Number" type="number">
+            <input class="form-control" id="own_ph" name="own_ph" placeholder="Phone Number" type="number" required>
             <label for="own_ph">Phone Number</label>
         </div>
         <div class="col-12 form-floating">
-            <input class="form-control" id="address" name="address" placeholder="Address"></input>
+            <input class="form-control" id="address" name="address" placeholder="Address" required>
             <label for="address">Address</label>
         </div>
         <div class="col-12 form-floating">
             <input class="form-control" id="address2" name="address2" placeholder="Address 2"></input>
             <label for="address2">Address 2</label>
         </div>
-        <div class="col-md-4">
-            <label for="class" class="form-label">Class</label>
-            <select id="class" class="form-select">
-                <option selected>Class</option>
-                <option>Class-9</option>
-                <option>Class-10</option>
-                <option>Class-11</option>
-                <option>Class-12</option>
-            </select>
-            <select class="form-select" name="class">
-                <option disabled selected>Class</option>
+        <div class="col-4"></div>
+        <div class="col-md-4 text-center">
+            <label for="grade" class="form-label">Class</label>
+            <select class="form-select text-center" id="grade" name="grade" required>
+                <option disabled selected>Select Class</option>
                 {% for class in classes %}
                     <option value="{{ class }}">{{ class }}</option>
                 {% endfor %}
             </select>
         </div>
-
-        <div class="col-12">
-            <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck">
-            <label class="form-check-label" for="gridCheck">
-                Check me out
-            </label>
-            </div>
-        </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Sign in</button>
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary">Next</button>
         </div>
     </form>
 {% endblock %}

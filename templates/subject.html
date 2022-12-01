@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Form
+{% endblock %}
+
+{% block main %}
+    <div class="md-3">
+        
+    </div>
+    <form action="/login" class="row g-3" method="post" >
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="maths" value="Mathematics">
+            <label class="form-check-label" for="maths">Mathematics</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="science" value="Science">
+            <label class="form-check-label" for="science">Science</label>
+          </div>
+        </div>
+    </form>
+{% endblock %}
