@@ -19,3 +19,37 @@ Session(app)
 
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///students.db")
+
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+
+@app.route("/admissions")
+def admissions():
+    if request.method == "GET":
+        ...
+        #TODO
+    if request.method == "POST":
+        ...
+        #TODO
+
+
+@app.route("/forms")
+def forms():
+    if request.method == "GET":
+        return render_template("forms.html")
+    if request.method == "POST":
+        ...
+        #TODO
+
+
+@app.route("/about")
+def about():
+    if request.method == "GET":
+        ...
+        #TODO
+    if request.method == "POST":
+        ...
+        #TODO

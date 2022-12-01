@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Form
+{% endblock %}
+
+{% block main %}
+    <div class="md-3">
+        About The Student
+    </div>
+    <form action="/login" class="row g-3" method="post" >
+        <div class="col-md-4 form-floating">
+            <input class="form-control" id="first_name" name="first_name" placeholder="First Name" type="text">
+            <label for="first_name">First Name</label>
+        </div>
+        <div class="col-md-4 form-floating">
+            <input class="form-control" id="middle_name" name="middle_name" placeholder="Middle Name" type="text">
+            <label for="middle_name">Middle Name</label>
+        </div>
+        <div class="col-md-4 form-floating">
+            <input class="form-control" id="last_name" name="last_name" placeholder="Last Name" type="text">
+            <label for="last_name">Last Name</label>
+        </div>
+        <div class="col-3">
+            <input type="text" readonly class="form-control-plaintext" value="Birthday">
+        </div>
+        <div class="col-3">
+            <input class="form-control" id="birthday" type="date">
+        </div>
+        <div class="col-6">
+            <input 
+        </div>
+        <div class="col-12 form-floating">
+            <textarea class="form-control" id="address" placeholder="Address" style="height: 100px"></textarea>
+            <label for="address">Address</label>
+        </div>
+        <div class="col-md-6">
+            <label for="inputCity" class="form-label">City</label>
+            <input type="text" class="form-control" id="inputCity">
+        </div>
+        <div class="col-md-4">
+            <label for="inputState" class="form-label">State</label>
+            <select id="inputState" class="form-select">
+            <option selected>Choose...</option>
+            <option>...</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="inputZip" class="form-label">Zip</label>
+            <input type="text" class="form-control" id="inputZip">
+        </div>
+        <div class="col-12">
+            <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+                Check me out
+            </label>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    </form>
+{% endblock %}
