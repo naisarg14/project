@@ -21,6 +21,9 @@ Session(app)
 db = SQL("sqlite:///students.db")
 
 
+CLASSES = ["Class-9", "Class-10", "Class-11", "Class-12"]
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -39,7 +42,7 @@ def admissions():
 @app.route("/forms")
 def forms():
     if request.method == "GET":
-        return render_template("forms.html")
+        return render_template("forms.html", classes=CLASSES)
     if request.method == "POST":
         ...
         #TODO
