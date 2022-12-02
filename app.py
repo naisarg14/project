@@ -22,6 +22,15 @@ Session(app)
 db = SQL("sqlite:///students.db")
 
 
+@app.after_request
+def after_request(response):
+    """Ensure responses aren't cached"""
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Expires"] = 0
+    response.headers["Pragma"] = "no-cache"
+    return response
+
+
 GRADES = ["Class-9", "Class-10", "Class-11", "Class-12"]
 SUBJECTS = {"title": "Subject", "type": "checkbox", "body": ["Mathematics", "Science"]}
 STREAMS = {"title": "Stream", "type": "radio", "body": ["Science", "Commerce"]}
@@ -32,7 +41,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/admissions")
+@app.route("/admissions", methods=["GET", "POST"])
 def admissions():
     if request.method == "GET":
         ...
@@ -67,26 +76,71 @@ def student():
 
         student = db.execute("SELECT * FROM student WHERE first_name=? AND birthdate=?", first_name, birthdate)
 
+        session["user_id"] = student[0]["id"]
 
-        if grade in["Class-9", "Class-10"]:
+        return redirect("/subject")
+
+
+
+
+@app.route("/subject", methods=["GET", "POST"])
+def subject():
+    if request.method == "GET":
+        student = db.execute("SELECT * FROM student WHERE id=?", session["user_id"])
+        grade = student[0]["grade"]
+
+        if grade in ["Class-9", "Class-10"]:
             return render_template("subject.html", subjects=SUBJECTS, id=student[0]["id"], grade=student[0]["grade"])
 
-        if grade in["Class-11", "Class-12"]:
-            return render_template("subject.html", subjects=STREAMS, id=id)
+        if grade in ["Class-11", "Class-12"]:
+            return render_template("subject.html", subjects=STREAMS, id=student[0]["id"], grade=student[0]["grade"])
 
 
-@app.route("/subject")
-def subject():
+    if request.method == "POST":
+        id = request.form.get("id")
+        grade = request.form.get("grade")
+        subject = request.form.get("subject")
+        stream = request.form.get("stream")
 
-    id = request.form.get("id")
-    grade = request.form.get("grade")
-    subject = request.form.get("subject")
-    subject = request.form.get("stream")
+        if stream:
+            db.execute("INSERT INTO streams (str_id, grade, stream) VALUES(?, ?, ?)", id, grade, stream)
 
-    return render_template("information.html")
+        if subject:
+            db.execute("INSERT INTO subjects (sub_id, grade, subject) VALUES(?, ?, ?)", id, grade, subject)
+
+        return redirect("/parents")
 
 
-@app.route("/about")
+@app.route("/parents", methods=["GET", "POST"])
+def parents():
+    if request.method == "GET":
+        
+        student = db.execute("SELECT * FROM student WHERE id=?", session["user_id"])
+
+        return render_template("parents.html", id=student[0]["id"])
+
+    if request.method == "POST":
+        f_f_name = request.form.get("f_first_name")
+        f_m_name = request.form.get("f_middle_name")
+        f_l_name = request.form.get("f_last_name")
+        f_email = request.form.get("f_email")
+        f_own_ph = request.form.get("f_own_ph")
+        f_occupation = request.form.get("f_occupation")
+
+        m_f_name = request.form.get("m_first_name")
+        m_m_name = request.form.get("m_middle_name")
+        m_l_name = request.form.get("m_last_name")
+        m_email = request.form.get("m_email")
+        m_own_ph = request.form.get("m_own_ph")
+        m_occupation = request.form.get("m_occupation")
+
+        db.execute("INSERT INTO father (father_id, first_name, middle_name, last_name, email, ph_no, occupation) VALUES(?, ?, ?, ?, ?, ?, ?", session["user_id"], f_f_name, f_m_name, f_l_name, f_email, f_own_ph, f_occupation)
+        db.execute("INSERT INTO mother (mother_id, first_name, middle_name, last_name, email, ph_no, occupation) VALUES(?, ?, ?, ?, ?, ?, ?", session["user_id"], m_f_name, m_m_name, m_l_name, m_email, m_own_ph, m_occupation)
+
+        request("/comfirm")
+
+
+@app.route("/about", methods=["GET", "POST"])
 def about():
     if request.method == "GET":
         ...

@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Form
+{% endblock %}
+
+
+{% block main %}
+    <form action="/student" class="row g-3" method="post" >
+        <input name="id" type="hidden" value="{{ id }}">
+        <h3>Father's Details</h3>
+        <br>
+
+        <div class="col-md-4 form-floating"> 
+            <input autofocus autocomplete="off" class="form-control" id="f_first_name" name="f_first_name" placeholder="First Name *" type="text" required>
+            <label for="m_first_name">First Name *</label>
+        </div>
+        <div class="col-md-4 form-floating">
+            <input autocomplete="off" class="form-control" id="f_middle_name" name="f_middle_name" placeholder="Middle Name" type="text">
+            <label for="f_middle_name">Middle Name</label>
+        </div>
+        <div class="col-md-4 form-floating">
+            <input autocomplete="off" class="form-control" id="f_last_name" name="f_last_name" placeholder="Last Name *" type="text" required>
+            <label for="f_last_name">Last Name *</label>
+        </div>
+        
+        <div class="col-md-4 form-floating">
+            <input autocomplete="off" class="form-control" id="f_email" name="f_email" placeholder="Email" type="email" required>
+            <label for="email">Email</label>
+        </div>
+        <div class="col-md-4 form-floating">
+            <input autocomplete="off" class="form-control" id="f_own_ph" name="f_own_ph" placeholder="Phone Number *" type="number" required>
+            <label for="own_ph">Phone Number *</label>
+        </div>
+        <div class="col-md-4 form-floating">
+            <input autocomplete="off" class="form-control" id="f_occupation" name="f_occupation" placeholder="Occupation *" type="text" required>
+            <label for="own_ph">Occupation *</label>
+        </div>
+
+        <h3>Mother's Details</h3>
+        <br>
+
+        <div class="col-md-4 form-floating"> 
+            <input autofocus autocomplete="off" class="form-control" id="m_first_name" name="m_first_name" placeholder="First Name *" type="text" required>
+            <label for="first_name">First Name *</label>
+        </div>
+        <div class="col-md-4 form-floating">
+            <input autocomplete="off" class="form-control" id="m_middle_name" name="m_middle_name" placeholder="Middle Name" type="text">
+            <label for="middle_name">Middle Name</label>
+        </div>
+        <div class="col-md-4 form-floating">
+            <input autocomplete="off" class="form-control" id="m_last_name" name="m_last_name" placeholder="Last Name *" type="text" required>
+            <label for="last_name">Last Name *</label>
+        </div>
+        
+        <div class="col-md-4 form-floating">
+            <input autocomplete="off" class="form-control" id="m_email" name="m_email" placeholder="Email" type="email" required>
+            <label for="email">Email</label>
+        </div>
+        <div class="col-md-4 form-floating">
+            <input autocomplete="off" class="form-control" id="_own_ph" name="m_own_ph" placeholder="Phone Number *" type="number" required>
+            <label for="own_ph">Phone Number *</label>
+        </div>
+        <div class="col-md-4 form-floating">
+            <input autocomplete="off" class="form-control" id="occupation" name="occupation" placeholder="Occupation *" type="text" required>
+            <label for="own_ph">Occupation *</label>
+        </div>
+        <div class="notice">Fields marked with * are required</div>
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        
+    </form>
+{% endblock %}

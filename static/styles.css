@@ -20,3 +20,7 @@ nav .navbar-brand .green
 {
     color: #2e944b;
 }
+
+.notice {
+    font-style: italic;
+}
