@@ -4,51 +4,52 @@
     Form
 {% endblock %}
 
+
 {% block main %}
     <h3>About The Student</h3>
     <br>
     <form action="/student" class="row g-3" method="post" >
-        <div class="col-md-4 form-floating">
-            <input class="form-control" id="first_name" name="first_name" placeholder="First Name" type="text" required>
-            <label for="first_name">First Name</label>
+        <div class="col-md-4 form-floating"> 
+            <input autofocus autocomplete="off" class="form-control" id="first_name" name="first_name" placeholder="First Name *" type="text" required>
+            <label for="first_name">First Name *</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input class="form-control" id="middle_name" name="middle_name" placeholder="Middle Name" type="text">
+            <input autocomplete="off" class="form-control" id="middle_name" name="middle_name" placeholder="Middle Name" type="text">
             <label for="middle_name">Middle Name</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input class="form-control" id="last_name" name="last_name" placeholder="Last Name" type="text" required>
-            <label for="last_name">Last Name</label>
+            <input autocomplete="off" class="form-control" id="last_name" name="last_name" placeholder="Last Name *" type="text" required>
+            <label for="last_name">Last Name *</label>
         </div>
         <div class="col-2">
-            <input type="text" readonly class="form-control-plaintext" value="Birthdate">
+            <input type="text" readonly class="form-control-plaintext" value="Birthdate *">
         </div>
         <div class="col-2">
-            <input class="form-control" id="birthdate" type="date" required>
+            <input autocomplete="off" class="form-control" id="birthdate" name="birthdate" type="date" required>
         </div>
         <div class="col-md-4 form-floating">
-            <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-            <label for="email">Email</label>
+            <input autocomplete="off" class="form-control" id="email" name="email" placeholder="Email *" type="email" required>
+            <label for="email">Email *</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input class="form-control" id="own_ph" name="own_ph" placeholder="Phone Number" type="number" required>
-            <label for="own_ph">Phone Number</label>
+            <input autocomplete="off" class="form-control" id="own_ph" name="own_ph" placeholder="Phone Number *" type="number" required>
+            <label for="own_ph">Phone Number *</label>
         </div>
         <div class="col-12 form-floating">
-            <input class="form-control" id="address" name="address" placeholder="Address" required>
-            <label for="address">Address</label>
+            <input autocomplete="off" class="form-control" id="address" name="address" placeholder="Address *" required>
+            <label for="address">Address *</label>
         </div>
         <div class="col-12 form-floating">
-            <input class="form-control" id="address2" name="address2" placeholder="Address 2"></input>
+            <input autocomplete="off" class="form-control" id="address2" name="address2" placeholder="Address 2"></input>
             <label for="address2">Address 2</label>
         </div>
         <div class="col-4"></div>
         <div class="col-md-4 text-center">
-            <label for="grade" class="form-label">Class</label>
+            <label for="grade" class="form-label">Class *</label>
             <select class="form-select text-center" id="grade" name="grade" required>
                 <option disabled selected>Select Class</option>
-                {% for class in classes %}
-                    <option value="{{ class }}">{{ class }}</option>
+                {% for grade in grades %}
+                    <option value="{{ grade }}">{{ grade }}</option>
                 {% endfor %}
             </select>
         </div>
