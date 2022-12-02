@@ -5,18 +5,29 @@
 {% endblock %}
 
 {% block main %}
-    <div class="md-3">
-        
-    </div>
-    <form action="/login" class="row g-3" method="post" >
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="maths" value="Mathematics">
-            <label class="form-check-label" for="maths">Mathematics</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="science" value="Science">
-            <label class="form-check-label" for="science">Science</label>
-          </div>
+    <h3>
+        Select Your {{ subjects.title }}
+    </h3>
+    <form action="/subject" class="row g-3" method="post">
+        <input name="id" type="hidden" value="{{ id }}">
+        <input name="grade" type="hidden" value="{{ grade }}">
+        {% if subjects.type == "checkbox" %}
+            {% for subject in subjects.body %}
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" name="subject" type="checkbox" id={{ subject }} value={{ subject }}>
+                    <label class="form-check-label" for={{ subject }}>{{ subject }}</label>
+                </div>
+            {% endfor %}
+        {% else %}
+            {% for subject in subjects.body %}
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" name="stream" type="radio" id={{ subject }} value={{ subject }}>
+                    <label class="form-check-label" for={{ subject }}>{{ subject }}</label>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Next</button>
         </div>
     </form>
 {% endblock %}

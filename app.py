@@ -23,7 +23,8 @@ db = SQL("sqlite:///students.db")
 
 
 GRADES = ["Class-9", "Class-10", "Class-11", "Class-12"]
-SUBJECTS = ["Mathematics", "Science"]
+SUBJECTS = {"title": "Subject", "type": "checkbox", "body": ["Mathematics", "Science"]}
+STREAMS = {"title": "Stream", "type": "radio", "body": ["Science", "Commerce"]}
 
 
 @app.route("/")
@@ -64,15 +65,25 @@ def student():
 
         db.execute("INSERT INTO student (first_name, middle_name, last_name, birthdate, email, own_ph, address, address2, grade) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", first_name, middle_name, last_name, birthdate, email, int(own_ph), address, address2, grade)
 
-        return apology("Succeess")
+        student = db.execute("SELECT * FROM student WHERE first_name=? AND birthdate=?", first_name, birthdate)
+
+
+        if grade in["Class-9", "Class-10"]:
+            return render_template("subject.html", subjects=SUBJECTS, id=student[0]["id"], grade=student[0]["grade"])
+
+        if grade in["Class-11", "Class-12"]:
+            return render_template("subject.html", subjects=STREAMS, id=id)
+
 
 @app.route("/subject")
 def subject():
-    if request.method == "GET":
-        return render_template("forms.html", subjects=SUBJECTS)
-    if request.method == "POST":
-        ...
-        #TODO
+
+    id = request.form.get("id")
+    grade = request.form.get("grade")
+    subject = request.form.get("subject")
+    subject = request.form.get("stream")
+
+    return render_template("information.html")
 
 
 @app.route("/about")
