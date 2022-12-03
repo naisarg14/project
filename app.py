@@ -38,6 +38,7 @@ STREAMS = {"title": "Stream", "type": "radio", "body": ["Science", "Commerce"]}
 
 @app.route("/")
 def index():
+    session["user_id"] = 0
     return render_template("index.html")
 
 
@@ -54,7 +55,14 @@ def admissions():
 @app.route("/student", methods=["GET", "POST"])
 def student():
     if request.method == "GET":
-        return render_template("forms.html", grades=GRADES, subjects=SUBJECTS)
+        if session["user_id"] != 0:
+            student = db.execute("SELECT * FROM student WHERE id=?", session["user_id"])
+            student = student[0]
+
+            return render_template("forms.html", grades=GRADES, subjects=SUBJECTS, student=student)
+
+        student = {}
+        return render_template("forms.html", grades=GRADES, subjects=SUBJECTS, student=student)
     if request.method == "POST":
         first_name = request.form.get("first_name")
         middle_name = request.form.get("middle_name")
@@ -117,6 +125,12 @@ def parents():
         
         student = db.execute("SELECT * FROM student WHERE id=?", session["user_id"])
 
+        father = db.execute("SELECT * FROM father WHERE id=?", session["user_id"])
+        mother = db.execute("SELECT * FROM mother WHERE id=?", session["user_id"])
+
+        if not father or not mother:
+            return render_template("parents.html", id=student[0]["id"])
+
         return render_template("parents.html", id=student[0]["id"])
 
     if request.method == "POST":
@@ -148,3 +162,9 @@ def about():
     if request.method == "POST":
         ...
         #TODO
+
+    
+@app.route("/clear", methods=["GET", "POST"])
+def clear():
+    session["user_id"] = 0
+    return redirect("/student")
