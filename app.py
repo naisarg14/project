@@ -79,6 +79,12 @@ def student():
 
         if grade not in GRADES:
             return apology("Error")
+        if session["user_id"]:
+            db.execute("DELETE FROM student WHERE id=?", session["user_id"])
+            db.execute("INSERT INTO student (id, first_name, middle_name, last_name, birthdate, email, own_ph, address, address2, grade) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",session["user_id"], first_name, middle_name, last_name, birthdate, email, int(own_ph), address, address2, grade)
+            return redirect("/subject")
+
+
 
         db.execute("INSERT INTO student (first_name, middle_name, last_name, birthdate, email, own_ph, address, address2, grade) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", first_name, middle_name, last_name, birthdate, email, int(own_ph), address, address2, grade)
 
@@ -107,15 +113,29 @@ def subject():
     if request.method == "POST":
         id = request.form.get("id")
         grade = request.form.get("grade")
-        subject = request.form.get("subject")
+        maths = request.form.get("Mathematics")
+        science = request.form.get("Science")
+
+
+        if not maths:
+            maths = ""
+        if not science:
+            science = ""
+
+        subject = maths + " " + science
         stream = request.form.get("stream")
 
+        if int(id) != int(session["user_id"]):
+            return apology("Error")
+
+        db.execute("DELETE FROM subjects WHERE sub_id=?", session["user_id"])
+        db.execute("DELETE FROM streams WHERE str_id=?", session["user_id"])
+
         if stream:
-            db.execute("INSERT INTO streams (str_id, grade, stream) VALUES(?, ?, ?)", id, grade, stream)
+            db.execute("INSERT INTO streams (str_id, grade, stream) VALUES(?, ?, ?)", session["user_id"], grade, stream)
+            return redirect("/parents")
 
-        if subject:
-            db.execute("INSERT INTO subjects (sub_id, grade, subject) VALUES(?, ?, ?)", id, grade, subject)
-
+        db.execute("INSERT INTO subjects (sub_id, grade, subject) VALUES(?, ?, ?)", session["user_id"], grade, subject)
         return redirect("/parents")
 
 
@@ -125,13 +145,15 @@ def parents():
         
         student = db.execute("SELECT * FROM student WHERE id=?", session["user_id"])
 
-        father = db.execute("SELECT * FROM father WHERE id=?", session["user_id"])
-        mother = db.execute("SELECT * FROM mother WHERE id=?", session["user_id"])
+        father = db.execute("SELECT * FROM father WHERE father_id=?", session["user_id"])
+        mother = db.execute("SELECT * FROM mother WHERE mother_id=?", session["user_id"])
 
         if not father or not mother:
-            return render_template("parents.html", id=student[0]["id"])
+            father = {}
+            mother = {}
+            return render_template("parents.html", id=student[0]["id"], father=father, mother=mother)
 
-        return render_template("parents.html", id=student[0]["id"])
+        return render_template("parents.html", id=student[0]["id"], father=father, mother=mother)
 
     if request.method == "POST":
         f_f_name = request.form.get("f_first_name")
@@ -148,10 +170,29 @@ def parents():
         m_own_ph = request.form.get("m_own_ph")
         m_occupation = request.form.get("m_occupation")
 
-        db.execute("INSERT INTO father (father_id, first_name, middle_name, last_name, email, ph_no, occupation) VALUES(?, ?, ?, ?, ?, ?, ?", session["user_id"], f_f_name, f_m_name, f_l_name, f_email, f_own_ph, f_occupation)
-        db.execute("INSERT INTO mother (mother_id, first_name, middle_name, last_name, email, ph_no, occupation) VALUES(?, ?, ?, ?, ?, ?, ?", session["user_id"], m_f_name, m_m_name, m_l_name, m_email, m_own_ph, m_occupation)
+        for i in [f_m_name, m_m_name]:
+            if not i:
+                i = "None"
 
-        request("/comfirm")
+        db.execute("DELETE FROM mother WHERE mother_id=?", session["user_id"])
+        db.execute("DELETE FROM father WHERE father_id=?", session["user_id"])
+
+        db.execute("INSERT INTO father (father_id, first_name, middle_name, last_name, email, ph_no, occupation) VALUES(?, ?, ?, ?, ?, ?, ?)", session["user_id"], f_f_name, f_m_name, f_l_name, f_email, f_own_ph, f_occupation)
+        db.execute("INSERT INTO mother (mother_id, first_name, middle_name, last_name, email, ph_no, occupation) VALUES(?, ?, ?, ?, ?, ?, ?)", session["user_id"], m_f_name, m_m_name, m_l_name, m_email, m_own_ph, m_occupation)
+
+        return redirect("/comfirm")
+
+
+@app.route("/comfirm", methods=["GET", "POST"])
+def confirm():
+    if request.method == "GET":
+        student = db.execute("SELECT * FROM student WHERE id=?", session["user_id"])
+        subjects = db.execute("SELECT * FROM subjects WHERE sub_id=?", session["user_id"])
+        streams = db.execute("SELECT * FROM streams WHERE str_id=?", session["user_id"])
+        mother = db.execute("SELECT * FROM mother WHERE mother_id=?", session["user_id"])
+        father = db.execute("SELECT * FROM father WHERE father_id=?", session["user_id"])
+        
+        return render_template("confirm.html", student=student[0], subjects=subjects, streams=streams, father=father, mother=mother)
 
 
 @app.route("/about", methods=["GET", "POST"])
@@ -163,8 +204,13 @@ def about():
         ...
         #TODO
 
-    
+
 @app.route("/clear", methods=["GET", "POST"])
 def clear():
+    db.execute("DELETE FROM subjects WHERE sub_id=?", session["user_id"])
+    db.execute("DELETE FROM streams WHERE str_id=?", session["user_id"])
+    db.execute("DELETE FROM mother WHERE mother_id=?", session["user_id"])
+    db.execute("DELETE FROM father WHERE father_id=?", session["user_id"])
+    db.execute("DELETE FROM student WHERE id=?", session["user_id"])
     session["user_id"] = 0
     return redirect("/student")

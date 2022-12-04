@@ -6,34 +6,34 @@
 
 
 {% block main %}
-    <form action="/student" class="row g-3" method="post" >
+    <form action="/parents" class="row g-3" method="post" >
         <input name="id" type="hidden" value="{{ id }}">
         <h3>Father's Details</h3>
         <br>
 
         <div class="col-md-4 form-floating"> 
-            <input autofocus autocomplete="off" class="form-control" id="f_first_name" name="f_first_name" placeholder="First Name *" type="text" required>
+            <input autofocus autocomplete="off" class="form-control" id="f_first_name" name="f_first_name" placeholder="First Name *" type="text" required value={{ father.first_name }}>
             <label for="m_first_name">First Name *</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="f_middle_name" name="f_middle_name" placeholder="Middle Name" type="text">
+            <input autocomplete="off" class="form-control" id="f_middle_name" name="f_middle_name" placeholder="Middle Name" type="text" value={{ father.middle_name }}>
             <label for="f_middle_name">Middle Name</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="f_last_name" name="f_last_name" placeholder="Last Name *" type="text" required>
+            <input autocomplete="off" class="form-control" id="f_last_name" name="f_last_name" placeholder="Last Name *" type="text" required value={{ father.last_name }}>
             <label for="f_last_name">Last Name *</label>
         </div>
         
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="f_email" name="f_email" placeholder="Email" type="email" required>
+            <input autocomplete="off" class="form-control" id="f_email" name="f_email" placeholder="Email" type="email" required value={{ father.email }}>
             <label for="email">Email</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="f_own_ph" name="f_own_ph" placeholder="Phone Number *" type="number" required>
+            <input autocomplete="off" class="form-control" id="f_own_ph" name="f_own_ph" placeholder="Phone Number *" type="number" required value={{ father.own_ph }}>
             <label for="own_ph">Phone Number *</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="f_occupation" name="f_occupation" placeholder="Occupation *" type="text" required>
+            <input autocomplete="off" class="form-control" id="f_occupation" name="f_occupation" placeholder="Occupation *" type="text" required value={{ father.occupation }}>
             <label for="own_ph">Occupation *</label>
         </div>
 
@@ -41,35 +41,58 @@
         <br>
 
         <div class="col-md-4 form-floating"> 
-            <input autofocus autocomplete="off" class="form-control" id="m_first_name" name="m_first_name" placeholder="First Name *" type="text" required>
+            <input autofocus autocomplete="off" class="form-control" id="m_first_name" name="m_first_name" placeholder="First Name *" type="text" required value={{ mother.first_name }}>
             <label for="first_name">First Name *</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="m_middle_name" name="m_middle_name" placeholder="Middle Name" type="text">
+            <input autocomplete="off" class="form-control" id="m_middle_name" name="m_middle_name" placeholder="Middle Name" type="text" value={{ mother.middle_name }}>
             <label for="middle_name">Middle Name</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="m_last_name" name="m_last_name" placeholder="Last Name *" type="text" required>
+            <input autocomplete="off" class="form-control" id="m_last_name" name="m_last_name" placeholder="Last Name *" type="text" required value={{ mother.last_name }}>
             <label for="last_name">Last Name *</label>
         </div>
         
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="m_email" name="m_email" placeholder="Email" type="email" required>
+            <input autocomplete="off" class="form-control" id="m_email" name="m_email" placeholder="Email" type="email" required value={{ mother.email }}>
             <label for="email">Email</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="_own_ph" name="m_own_ph" placeholder="Phone Number *" type="number" required>
+            <input autocomplete="off" class="form-control" id="m_own_ph" name="m_own_ph" placeholder="Phone Number *" type="number" required value={{ mother.oen_ph }}>
             <label for="own_ph">Phone Number *</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="occupation" name="occupation" placeholder="Occupation *" type="text" required>
+            <input autocomplete="off" class="form-control" id="m_occupation" name="m_occupation" placeholder="Occupation *" type="text" required value={{ mother.occupation }}>
             <label for="own_ph">Occupation *</label>
         </div>
         <div class="notice">Fields marked with * are required</div>
         <div class="col-12 text-center">
-            <a class="btn btn-primary" href="/clear" role="button">Clear</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clear">
+                Clear
+            </button>
             <a class="btn btn-primary" href="/subject" role="button">Back</a>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Next</button>
+        </div>
+        
+
+        
+        
+        <div class="modal fade" id="clear" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Clear</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Clearing the form is a permanent action
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a class="btn btn-primary" href="/clear" role="button">Clear</a>
+                    </div>
+                </div>
+            </div>
         </div>
         
     </form>

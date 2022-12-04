@@ -14,7 +14,7 @@
         {% if subjects.type == "checkbox" %}
             {% for subject in subjects.body %}
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" name="subject" type="checkbox" id={{ subject }} value={{ subject }}>
+                    <input class="form-check-input" name={{ subject }} type="checkbox" id={{ subject }} value={{ subject }}>
                     <label class="form-check-label" for={{ subject }}>{{ subject }}</label>
                 </div>
             {% endfor %}
@@ -28,9 +28,29 @@
         {% endif %}
         
         <div class="col-12">
-            <a class="btn btn-primary" href="/clear" role="button">Clear</a>
-            <a class="btn btn-primary" href="/subject" role="button">Back</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clear">
+                Clear
+            </button>
+            <a class="btn btn-primary" href="/student" role="button">Back</a>
             <button type="submit" class="btn btn-primary">Next</button>
+        </div>
+
+        <div class="modal fade" id="clear" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Clear</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Clearing the form is a permanent action
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a class="btn btn-primary" href="/clear" role="button">Clear</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 {% endblock %}

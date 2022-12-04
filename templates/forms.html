@@ -22,7 +22,7 @@
             <label for="last_name">Last Name *</label>
         </div>
         <div class="col-2">
-            <input type="text" readonly class="form-control-plaintext" value="Birthdate *">
+            Birthdate *
         </div>
         <div class="col-2">
             <input autocomplete="off" class="form-control" id="birthdate" name="birthdate" type="date" required value={{ student.birthdate }}>
@@ -55,8 +55,28 @@
         </div>
         <div class="notice">Fields marked with * are required</div>
         <div class="col-12 text-center">
-            <a class="btn btn-primary" href="/clear" role="button">Clear</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clear">
+                Clear
+            </button>
             <button type="submit" class="btn btn-primary">Next</button>
+        </div>
+
+        <div class="modal fade" id="clear" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Clear</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Clearing the form is a permanent action
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a class="btn btn-primary" href="/clear" role="button">Clear</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 {% endblock %}
