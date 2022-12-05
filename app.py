@@ -188,11 +188,17 @@ def confirm():
     if request.method == "GET":
         student = db.execute("SELECT * FROM student WHERE id=?", session["user_id"])
         subjects = db.execute("SELECT * FROM subjects WHERE sub_id=?", session["user_id"])
-        streams = db.execute("SELECT * FROM streams WHERE str_id=?", session["user_id"])
+        streams = db.execute("SELECT * FROM streams W2HERE str_id=?", session["user_id"])
         mother = db.execute("SELECT * FROM mother WHERE mother_id=?", session["user_id"])
         father = db.execute("SELECT * FROM father WHERE father_id=?", session["user_id"])
+
+        if subjects[0]:
+            sub_str = ["Subject: ", subjects[0]["subject"]]
+            return render_template("confirm.html", student=student[0], sub_str=sub_str, father=father[0], mother=mother[0])
         
-        return render_template("confirm.html", student=student[0], subjects=subjects, streams=streams, father=father, mother=mother)
+        if streams:
+            sub_str = ["Stream: ", streams[0]["stream"]]
+            return render_template("confirm.html", student=student[0], sub_str=sub_str, father=father[0], mother=mother[0])
 
 
 @app.route("/about", methods=["GET", "POST"])
