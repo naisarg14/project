@@ -100,8 +100,11 @@ def student():
 @app.route("/subject", methods=["GET", "POST"])
 def subject():
     if request.method == "GET":
+
+        if not session["user_id"] or session["user_id"] == 0:
+            return redirect("/student")
+        
         student = db.execute("SELECT * FROM student WHERE id=?", session["user_id"])
-        grade = student[0]["grade"]
 
         if grade in ["Class-9", "Class-10"]:
             return render_template("subject.html", subjects=SUBJECTS, id=student[0]["id"], grade=student[0]["grade"])
@@ -143,6 +146,9 @@ def subject():
 def parents():
     if request.method == "GET":
         
+        if not session["user_id"] or session["user_id"] == 0:
+            return redirect("/student")
+
         student = db.execute("SELECT * FROM student WHERE id=?", session["user_id"])
 
         father = db.execute("SELECT * FROM father WHERE father_id=?", session["user_id"])
@@ -186,6 +192,10 @@ def parents():
 @app.route("/comfirm", methods=["GET", "POST"])
 def confirm():
     if request.method == "GET":
+
+        if not session["user_id"] or session["user_id"] == 0:
+            return redirect("/student")
+
         student = db.execute("SELECT * FROM student WHERE id=?", session["user_id"])
         subjects = db.execute("SELECT * FROM subjects WHERE sub_id=?", session["user_id"])
         streams = db.execute("SELECT * FROM streams W2HERE str_id=?", session["user_id"])
@@ -196,9 +206,12 @@ def confirm():
             sub_str = ["Subject: ", subjects[0]["subject"]]
             return render_template("confirm.html", student=student[0], sub_str=sub_str, father=father[0], mother=mother[0])
         
-        if streams:
+        if streams[0]:
             sub_str = ["Stream: ", streams[0]["stream"]]
             return render_template("confirm.html", student=student[0], sub_str=sub_str, father=father[0], mother=mother[0])
+        
+    if request.method == "POST":
+        return redirect("/")
 
 
 @app.route("/about", methods=["GET", "POST"])

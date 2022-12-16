@@ -24,3 +24,10 @@ nav .navbar-brand .green
 .notice {
     font-style: italic;
 }
+
+.image
+{
+    border: 2px solid black; 
+    border-radius: 5%;
+    width: 100%;
+}
