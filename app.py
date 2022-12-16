@@ -45,8 +45,7 @@ def index():
 @app.route("/admissions", methods=["GET", "POST"])
 def admissions():
     if request.method == "GET":
-        ...
-        #TODO
+        return render_template("admissions.html")
     if request.method == "POST":
         ...
         #TODO
