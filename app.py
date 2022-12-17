@@ -216,8 +216,7 @@ def confirm():
 @app.route("/about", methods=["GET", "POST"])
 def about():
     if request.method == "GET":
-        ...
-        #TODO
+        return render_template("about.html")
     if request.method == "POST":
         ...
         #TODO
