@@ -187,7 +187,7 @@ def parents():
         db.execute("INSERT INTO father (father_id, first_name, middle_name, last_name, email, ph_no, occupation) VALUES(?, ?, ?, ?, ?, ?, ?)", session["user_id"], f_f_name, f_m_name, f_l_name, f_email, f_own_ph, f_occupation)
         db.execute("INSERT INTO mother (mother_id, first_name, middle_name, last_name, email, ph_no, occupation) VALUES(?, ?, ?, ?, ?, ?, ?)", session["user_id"], m_f_name, m_m_name, m_l_name, m_email, m_own_ph, m_occupation)
 
-        return redirect("/comfirm")
+        return redirect("/confirm")
 
 
 @app.route("/confirm", methods=["GET", "POST"])
