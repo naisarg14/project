@@ -105,6 +105,8 @@ def subject():
         
         student = db.execute("SELECT * FROM student WHERE id=?", session["user_id"])
 
+        grade = student[0]["grade"]
+
         if grade in ["Class-9", "Class-10"]:
             return render_template("subject.html", subjects=SUBJECTS, id=student[0]["id"], grade=student[0]["grade"])
 
@@ -188,7 +190,7 @@ def parents():
         return redirect("/comfirm")
 
 
-@app.route("/comfirm", methods=["GET", "POST"])
+@app.route("/confirm", methods=["GET", "POST"])
 def confirm():
     if request.method == "GET":
 
@@ -197,15 +199,15 @@ def confirm():
 
         student = db.execute("SELECT * FROM student WHERE id=?", session["user_id"])
         subjects = db.execute("SELECT * FROM subjects WHERE sub_id=?", session["user_id"])
-        streams = db.execute("SELECT * FROM streams W2HERE str_id=?", session["user_id"])
+        streams = db.execute("SELECT * FROM streams WHERE str_id=?", session["user_id"])
         mother = db.execute("SELECT * FROM mother WHERE mother_id=?", session["user_id"])
         father = db.execute("SELECT * FROM father WHERE father_id=?", session["user_id"])
 
-        if subjects[0]:
+        if subjects:
             sub_str = ["Subject: ", subjects[0]["subject"]]
             return render_template("confirm.html", student=student[0], sub_str=sub_str, father=father[0], mother=mother[0])
         
-        if streams[0]:
+        if streams:
             sub_str = ["Stream: ", streams[0]["stream"]]
             return render_template("confirm.html", student=student[0], sub_str=sub_str, father=father[0], mother=mother[0])
         
@@ -217,9 +219,6 @@ def confirm():
 def about():
     if request.method == "GET":
         return render_template("about.html")
-    if request.method == "POST":
-        ...
-        #TODO
 
 
 @app.route("/clear", methods=["GET", "POST"])

@@ -10,4 +10,4 @@ def clear(id):
     db.execute("DELETE FROM student WHERE id=?", id)
 
 
-clear(2)
+clear(1)

@@ -55,37 +55,37 @@
 
         <h4>Subject Details</h4>
         <br>
-        <div>
+        <h5 class="text-center">
             {{ sub_str[0] }}{{ sub_str[1] }}
-        </div>
+        </h5>
 
 
         <h4>Father's Details</h4>
         <br>
 
         <div class="col-md-4 form-floating"> 
-            <input autofocus autocomplete="off" class="form-control" id="f_first_name" name="f_first_name" placeholder="First Name *" type="text" required value={{ father.first_name }}>
+            <input autofocus autocomplete="off" class="form-control" disabled id="f_first_name" name="f_first_name" placeholder="First Name *" type="text" required value={{ father.first_name }}>
             <label for="m_first_name">First Name *</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="f_middle_name" name="f_middle_name" placeholder="Middle Name" type="text" value={{ father.middle_name }}>
+            <input autocomplete="off" class="form-control" disabled id="f_middle_name" name="f_middle_name" placeholder="Middle Name" type="text" value={{ father.middle_name }}>
             <label for="f_middle_name">Middle Name</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="f_last_name" name="f_last_name" placeholder="Last Name *" type="text" required value={{ father.last_name }}>
+            <input autocomplete="off" class="form-control" disabled id="f_last_name" name="f_last_name" placeholder="Last Name *" type="text" required value={{ father.last_name }}>
             <label for="f_last_name">Last Name *</label>
         </div>
         
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="f_email" name="f_email" placeholder="Email" type="email" required value={{ father.email }}>
+            <input autocomplete="off" class="form-control" disabled id="f_email" name="f_email" placeholder="Email" type="email" required value={{ father.email }}>
             <label for="email">Email</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="f_own_ph" name="f_own_ph" placeholder="Phone Number *" type="number" required value={{ father.own_ph }}>
+            <input autocomplete="off" class="form-control" disabled id="f_own_ph" name="f_own_ph" placeholder="Phone Number *" type="number" required value={{ father.ph_no }}>
             <label for="own_ph">Phone Number *</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="f_occupation" name="f_occupation" placeholder="Occupation *" type="text" required value={{ father.occupation }}>
+            <input autocomplete="off" class="form-control" disabled id="f_occupation" name="f_occupation" placeholder="Occupation *" type="text" required value={{ father.occupation }}>
             <label for="own_ph">Occupation *</label>
         </div>
 
@@ -93,28 +93,28 @@
         <br>
 
         <div class="col-md-4 form-floating"> 
-            <input autofocus autocomplete="off" class="form-control" id="m_first_name" name="m_first_name" placeholder="First Name *" type="text" required value={{ mother.first_name }}>
+            <input autofocus autocomplete="off" class="form-control" disabled id="m_first_name" name="m_first_name" placeholder="First Name *" type="text" required value={{ mother.first_name }}>
             <label for="first_name">First Name *</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="m_middle_name" name="m_middle_name" placeholder="Middle Name" type="text" value={{ mother.middle_name }}>
+            <input autocomplete="off" class="form-control" disabled id="m_middle_name" name="m_middle_name" placeholder="Middle Name" type="text" value={{ mother.middle_name }}>
             <label for="middle_name">Middle Name</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="m_last_name" name="m_last_name" placeholder="Last Name *" type="text" required value={{ mother.last_name }}>
+            <input autocomplete="off" class="form-control" disabled id="m_last_name" name="m_last_name" placeholder="Last Name *" type="text" required value={{ mother.last_name }}>
             <label for="last_name">Last Name *</label>
         </div>
         
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="m_email" name="m_email" placeholder="Email" type="email" required value={{ mother.email }}>
+            <input autocomplete="off" class="form-control" disabled id="m_email" name="m_email" placeholder="Email" type="email" required value={{ mother.email }}>
             <label for="email">Email</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="m_own_ph" name="m_own_ph" placeholder="Phone Number *" type="number" required value={{ mother.oen_ph }}>
+            <input autocomplete="off" class="form-control" disabled id="m_own_ph" name="m_own_ph" placeholder="Phone Number *" type="number" required value={{ mother.ph_no }}>
             <label for="own_ph">Phone Number *</label>
         </div>
         <div class="col-md-4 form-floating">
-            <input autocomplete="off" class="form-control" id="m_occupation" name="m_occupation" placeholder="Occupation *" type="text" required value={{ mother.occupation }}>
+            <input autocomplete="off" class="form-control" disabled id="m_occupation" name="m_occupation" placeholder="Occupation *" type="text" required value={{ mother.occupation }}>
             <label for="own_ph">Occupation *</label>
         </div>
 
