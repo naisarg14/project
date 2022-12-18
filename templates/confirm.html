@@ -132,27 +132,8 @@
                 Clear
             </button>
             <a class="btn btn-primary" href="/parents" role="button">Back</a>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#submit">
-                Submit
-            </button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
 
-        <div class="modal fade" id="submit" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5">Submit</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to submit this information?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a class="btn btn-primary" href="/confirm" role="button">Submit</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </form>
 {% endblock %}
