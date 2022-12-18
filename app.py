@@ -212,7 +212,7 @@ def confirm():
             return render_template("confirm.html", student=student[0], sub_str=sub_str, father=father[0], mother=mother[0])
         
     if request.method == "POST":
-        return redirect("/")
+        return render_template("submitted.html")
 
 
 @app.route("/about", methods=["GET", "POST"])

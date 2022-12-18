@@ -11,7 +11,7 @@
     <h4>About The Student</h4>
     <form action="/confirm" class="row g-3" method="post" >
         <div class="col-md-4 form-floating"> 
-            <input autofocus autocomplete="off" class="form-control" disabled id="first_name" name="first_name" placeholder="First Name *" required type="text" value={{ student.first_name }}>
+            <input autocomplete="off" class="form-control" disabled id="first_name" name="first_name" placeholder="First Name *" required type="text" value={{ student.first_name }}>
             <label for="first_name">First Name *</label>
         </div>
         <div class="col-md-4 form-floating">
@@ -132,22 +132,24 @@
                 Clear
             </button>
             <a class="btn btn-primary" href="/parents" role="button">Back</a>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#submit">
+                Submit
+            </button>
         </div>
 
-        <div class="modal fade" id="clear" tabindex="-1">
+        <div class="modal fade" id="submit" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5">Clear</h1>
+                        <h1 class="modal-title fs-5">Submit</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Clearing the form is a permanent action
+                        Are you sure you want to submit this information?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a class="btn btn-primary" href="/clear" role="button">Clear</a>
+                        <a class="btn btn-primary" href="/confirm" role="button">Submit</a>
                     </div>
                 </div>
             </div>
